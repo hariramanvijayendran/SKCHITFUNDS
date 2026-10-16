@@ -1,4 +1,4 @@
-# Senthilkumar Chit Funds
+# Senthilkumar Chit Funds (SKCHITFUNDS)
 
 React + Vite + TypeScript + Tailwind CSS website for Velu Senthilkumar Chit Funds Private Limited.
 
@@ -23,3 +23,4 @@ Put approved company images in `public/images/` and set their paths in `src/data
 ## Content review
 
 Scheme figures are brochure transcriptions, flagged pending company approval. Tamil and legal-facing content needs company/legal review before publication.
+
