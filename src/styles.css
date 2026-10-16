@@ -1,0 +1,82 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --color-brand: #146B38;
+  --color-deep: #14532D;
+  --color-wine: #A51F2B;
+  --color-gold: #F0D279;
+  --color-gold-deep: #B88E1C;
+  --color-cream: #FAF8F2;
+  --color-charcoal: #1F1F1F;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cinzel', Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+  }
+  article {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .field {
+    min-height: 48px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(20, 107, 56, 0.25); /* taste-skill-ignore */
+    background-color: #ffffff;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    color: var(--color-charcoal);
+    transition: border-color 0.15s ease;
+  }
+  .field:focus {
+    border-color: var(--color-brand);
+    outline: none;
+  }
+}
+
+@keyframes tasteEntrance {
+  0% {
+    opacity: 0.2;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.taste-enter {
+  animation: tasteEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
