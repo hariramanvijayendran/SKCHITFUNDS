@@ -1,4 +1,4 @@
-﻿import { FormEvent, useEffect, useState, useId, type ReactNode } from 'react'
+import { FormEvent, useEffect, useState, useId, type ReactNode } from 'react'
 import { Phone, Mail, MapPin } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
@@ -75,8 +75,8 @@ export default function ContactPage() {
           {/* Contact Details & Leadership */}
           <div className="space-y-6">
             {/* Leadership Cards */}
-            <div className="rounded-2xl bg-white p-6 sm:p-8 space-y-5">
-              <span className="inline-block text-xs font-bold text-wine ">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-5">
+              <span className="inline-block text-xs font-bold text-wine uppercase tracking-wider">
                 {t.leadershipTitle}
               </span>
 
@@ -105,7 +105,7 @@ export default function ContactPage() {
             </div>
 
             {/* Address Cards */}
-            <div className="rounded-2xl bg-brand/5 p-6 sm:p-8 space-y-4 text-xs sm:text-sm leading-relaxed text-charcoal/80">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-4 text-xs sm:text-sm leading-relaxed text-charcoal/80">
               <div>
                 <b className="text-deep font-bold block">{t.addressTitle}</b>
                 <p className="mt-1">{t.regAddress}</p>
@@ -129,11 +129,11 @@ export default function ContactPage() {
           <form
             onSubmit={submit}
             noValidate
-            className="rounded-2xl bg-white p-6 sm:p-10 space-y-5"
+            className="rounded-3xl glass-surface p-6 sm:p-10 space-y-5 border border-white/80 shadow-xl"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label htmlFor={nameInputId} className="block text-xs font-bold text-deep  mb-2">
+                <label htmlFor={nameInputId} className="block text-xs font-bold text-deep mb-2">
                   {t.name}
                 </label>
                 <input
@@ -151,7 +151,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor={mobileInputId} className="block text-xs font-bold text-deep  mb-2">
+                <label htmlFor={mobileInputId} className="block text-xs font-bold text-deep mb-2">
                   {t.mobile}
                 </label>
                 <input
@@ -170,7 +170,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor={durationSelectId} className="block text-xs font-bold text-deep  mb-2">
+                <label htmlFor={durationSelectId} className="block text-xs font-bold text-deep mb-2">
                   {t.duration}
                 </label>
                 <select
@@ -194,7 +194,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label htmlFor={valueSelectId} className="block text-xs font-bold text-deep  mb-2">
+                <label htmlFor={valueSelectId} className="block text-xs font-bold text-deep mb-2">
                   {t.chit}
                 </label>
                 <select
@@ -221,7 +221,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <label htmlFor={messageTextareaId} className="block text-xs font-bold text-deep  mb-2">
+              <label htmlFor={messageTextareaId} className="block text-xs font-bold text-deep mb-2">
                 {t.message}
               </label>
               <textarea
@@ -235,13 +235,13 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-wine px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-wine px-6 text-sm font-bold text-white transition-all hover:bg-wine/90 active:scale-95 disabled:opacity-50 shadow-md shadow-wine/25"
             >
               {status === 'loading' ? t.submitting : t.submit}
             </button>
 
             {status === 'success' && (
-              <p className="rounded-lg bg-brand/10 p-4 text-xs font-bold text-deep" role="status">
+              <p className="rounded-xl bg-brand/10 border border-brand/20 p-4 text-xs font-bold text-deep" role="status">
                 {t.demoSuccess}
               </p>
             )}

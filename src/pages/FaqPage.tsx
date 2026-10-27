@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { useLang } from '../context/LangContext'
 import { copy } from '../data/copy'
@@ -38,10 +38,10 @@ export default function FaqPage() {
         {/* Accordion */}
         <div className="space-y-3">
           {faqs.map(([q, a], i) => (
-            <div key={q} className="rounded-2xl bg-white overflow-hidden">
+            <div key={q} className="glass-card rounded-2xl overflow-hidden">
               <button
                 type="button"
-                className="flex min-h-16 w-full items-center justify-between gap-4 px-6 text-left font-bold text-deep text-sm sm:text-base"
+                className="flex min-h-16 w-full items-center justify-between gap-4 px-6 text-left font-bold text-deep text-sm sm:text-base transition-colors hover:text-brand"
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 aria-expanded={openFaq === i}
               >

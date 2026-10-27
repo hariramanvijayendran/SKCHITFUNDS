@@ -27,16 +27,24 @@ export default function Layout({ children }: { children: ReactNode }) {
     }`
 
   return (
-    <div className="overflow-x-hidden min-h-[100dvh] flex flex-col bg-cream text-charcoal">
+    <div className="relative overflow-x-hidden min-h-[100dvh] flex flex-col bg-cream text-charcoal">
+      {/* Ambient Glassmorphism Glow Orbs */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/20 blur-3xl" />
+        <div className="absolute top-1/4 -right-32 w-[30rem] h-[30rem] rounded-full bg-brand/12 blur-3xl" />
+        <div className="absolute top-2/3 -left-20 w-80 h-80 rounded-full bg-deep/10 blur-3xl" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-gold/15 blur-3xl" />
+      </div>
+
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-white p-3 font-bold text-deep"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-white p-3 font-bold text-deep rounded-lg shadow-lg"
       >
         Skip to main content
       </a>
 
       {/* Top Credentials Utility Bar */}
-      <div className="bg-deep text-cream/90 text-sm py-2 px-4 sm:px-6">
+      <div className="bg-deep/95 backdrop-blur-md text-cream/90 text-sm py-2 px-4 sm:px-6 border-b border-white/10">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
             <span className="font-semibold tracking-wide text-gold flex items-center gap-1.5">
@@ -46,20 +54,20 @@ export default function Layout({ children }: { children: ReactNode }) {
             <span className="hidden md:inline text-cream/80">{t.regAct}</span>
           </div>
           <div className="flex items-center gap-4 text-cream/80">
-            <a href="tel:+919360066669" className="hover:text-gold flex items-center gap-1 font-semibold">
+            <a href="tel:+919360066669" className="hover:text-gold flex items-center gap-1 font-semibold transition-colors">
               <Phone size={12} /> +91 93600 66669
             </a>
             <span className="text-cream/40">|</span>
-            <a href="mailto:skchitfundspvtltd@yahoo.com" className="hover:text-gold hidden sm:flex items-center gap-1">
+            <a href="mailto:skchitfundspvtltd@yahoo.com" className="hover:text-gold hidden sm:flex items-center gap-1 transition-colors">
               <Mail size={12} /> {t.emailAddress}
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main Header & Navigation */}
-      <header className="sticky top-0 z-40 bg-cream shadow-none">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+      {/* Main Header & Floating Glass Navigation */}
+      <header className="sticky top-0 z-40 px-3 sm:px-6 py-2.5 transition-all">
+        <div className="glass-surface mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 rounded-2xl shadow-[0_8px_32px_rgba(20,83,45,0.06)] border border-white/80">
           {/* Logo */}
           <Link
             to="/"
@@ -71,14 +79,14 @@ export default function Layout({ children }: { children: ReactNode }) {
               src={companyImages.icon}
               width="1024"
               height="744"
-              className="h-9 w-auto sm:h-11 object-contain shrink-0"
+              className="h-9 w-auto sm:h-11 object-contain shrink-0 drop-shadow-sm"
               alt="Velu Senthilkumar Chit Funds icon"
             />
             <img
               src={companyImages.logo}
               width="1024"
               height="235"
-              className="h-6 w-auto sm:h-8 max-w-[12rem] sm:max-w-[17rem] object-contain"
+              className="h-6 w-auto sm:h-8 max-w-[12rem] sm:max-w-[17rem] object-contain drop-shadow-sm"
               alt="Velu Senthilkumar Chit Funds logo"
             />
           </Link>
@@ -96,7 +104,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-2.5">
             <button
               type="button"
-              className="min-h-11 rounded-lg bg-brand/10 hover:bg-brand/20 px-3.5 text-sm font-extrabold text-deep transition-colors"
+              className="min-h-10 rounded-xl glass-pill px-3.5 text-xs sm:text-sm font-extrabold text-deep hover:bg-white transition-all active:scale-95 shadow-sm"
               onClick={() => setLang(lang === 'en' ? 'ta' : 'en')}
               aria-label="Switch between English and Tamil"
             >
@@ -104,13 +112,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             </button>
             <Link
               to="/contact"
-              className="hidden min-h-11 items-center justify-center rounded-lg bg-wine px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 sm:inline-flex"
+              className="hidden min-h-10 items-center justify-center rounded-xl bg-wine px-5 text-xs sm:text-sm font-bold text-white transition-all hover:bg-wine/90 active:scale-95 shadow-md shadow-wine/20 sm:inline-flex"
             >
               {t.enquire}
             </Link>
             <button
               type="button"
-              className="grid size-11 place-items-center rounded-lg bg-brand/10 text-deep lg:hidden"
+              className="grid size-10 place-items-center rounded-xl glass-pill text-deep lg:hidden transition-transform active:scale-95 shadow-sm"
               aria-expanded={menu}
               aria-controls="mobile-nav"
               onClick={() => setMenu(!menu)}
@@ -121,9 +129,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Drawer with Frosted Glass */}
         {menu && (
-          <nav id="mobile-nav" className="bg-cream px-4 py-4 lg:hidden" aria-label="Mobile Primary">
+          <nav id="mobile-nav" className="glass-surface mt-2 rounded-2xl p-4 lg:hidden border border-white/80 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200" aria-label="Mobile Primary">
             <div className="space-y-1">
               {nav.map(({ to, label }) => (
                 <NavLink
@@ -132,8 +140,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                   end={to === '/'}
                   onClick={() => setMenu(false)}
                   className={({ isActive }) =>
-                    `block rounded-lg px-4 py-3 text-base font-semibold ${
-                      isActive ? 'bg-deep text-cream' : 'text-charcoal hover:bg-black/5'
+                    `block rounded-xl px-4 py-3 text-base font-semibold transition-colors ${
+                      isActive ? 'bg-deep text-cream shadow-sm' : 'text-charcoal hover:bg-black/5'
                     }`
                   }
                 >
@@ -144,7 +152,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <Link
               to="/contact"
               onClick={() => setMenu(false)}
-              className="mt-4 flex min-h-12 items-center justify-center rounded-lg bg-wine px-4 py-3 text-center text-base font-bold text-white"
+              className="mt-4 flex min-h-12 items-center justify-center rounded-xl bg-wine px-4 py-3 text-center text-base font-bold text-white shadow-md shadow-wine/20"
             >
               {t.enquire}
             </Link>

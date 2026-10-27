@@ -15,6 +15,8 @@ import { copy } from '../data/copy'
 import { companyImages } from '../data/images'
 import { currency, schemes, type Scheme } from '../data/schemes'
 import ChitEstimator from '../components/ChitEstimator'
+import CardCarousel from '../components/CardCarousel'
+import HeroSlider from '../components/HeroSlider'
 
 type FormState = { name: string; mobile: string; duration: string; value: string; message: string }
 const blankForm: FormState = { name: '', mobile: '', duration: '', value: '', message: '' }
@@ -100,64 +102,17 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ── 1. Hero Section ── */}
-      <section className="bg-deep text-cream py-16 sm:py-20 lg:py-28 px-4 sm:px-6">
-        <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
-          <div className="space-y-6 taste-enter">
-            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-black tracking-tight text-cream leading-[1.08] max-w-3xl">
-              {t.hero}
-            </h1>
-            <p className="text-base sm:text-lg text-cream/90 leading-relaxed max-w-2xl font-normal">
-              {t.heroText}
-            </p>
-            <div className="pt-2 flex flex-wrap gap-4 items-center">
-              <a
-                href="#schemes"
-                className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-gold px-7 font-bold text-deep transition-opacity hover:opacity-90 text-base tracking-wide"
-              >
-                {t.explore} <ArrowRight size={18} />
-              </a>
-              <a
-                href="tel:+919360066669"
-                className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-white/10 hover:bg-white/15 px-6 font-bold text-cream text-base transition-colors"
-              >
-                <Phone size={17} /> {t.call}
-              </a>
-            </div>
-            <p className="text-base text-gold font-bold pt-2">
-              {t.tagline} · {t.companyName}
-            </p>
-          </div>
-
-          {/* Focal Visual: Authentic Managing Director portrait */}
-          <div className="mx-auto w-full max-w-sm lg:max-w-md taste-enter">
-            <div className="overflow-hidden rounded-2xl bg-white/5 border-2 border-gold/40">
-              <img
-                src={companyImages.managingDirector}
-                width="2360"
-                height="2344"
-                className="aspect-square w-full object-cover object-center"
-                alt="Rtn. Velu Senthilkumar, Managing Director"
-                loading="eager"
-              />
-            </div>
-            <div className="mt-4 border-l-2 border-gold pl-4 space-y-1">
-              <p className="text-xl font-black text-cream">Rtn. Velu Senthilkumar</p>
-              <p className="text-base font-bold text-gold">{t.mdRole}</p>
-              <p className="text-sm text-cream/80">{t.companyName}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── 1. Hero Highlights Banner Slider ── */}
+      <HeroSlider />
 
       {/* ── 2. Statutory Credentials & Transparency Strip ── */}
-      <section className="bg-brand text-cream py-5 px-4 sm:px-6">
+      <section className="mx-3 sm:mx-6 my-6 rounded-2xl glass-surface py-4 px-4 sm:px-6 shadow-sm border border-white/70">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 text-sm font-medium">
-          <div className="flex items-center gap-3 font-bold text-cream">
+          <div className="flex items-center gap-3 font-bold text-deep">
             <img src={companyImages.icon} width="36" height="36" className="size-9 object-contain drop-shadow-sm" alt="Senthilkumar Chit Funds official insignia" />
             <span>{t.regAct}</span>
           </div>
-          <div className="flex flex-wrap items-center gap-6 text-cream/95">
+          <div className="flex flex-wrap items-center gap-6 text-charcoal/90 font-semibold">
             <span>{t.cin}</span>
             <span>{t.pan}</span>
             <span>{t.tan}</span>
@@ -167,7 +122,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 3. Company Introduction & Cultural Grounding ── */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-cream">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
           <div className="space-y-6">
             <h2 className="text-2xl sm:text-4xl font-extrabold text-deep tracking-tight">
@@ -190,7 +145,7 @@ export default function HomePage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-2xl bg-brand/5 p-6 sm:p-8 space-y-3">
+            <div className="rounded-3xl glass-surface p-6 sm:p-8 space-y-3 border border-brand/20 shadow-md">
               <div className="flex items-center gap-3 text-deep font-bold text-base">
                 <Scale size={20} className="text-brand" />
                 <span>{lang === 'en' ? 'Statutory Oversight' : 'சட்டரீதியான பாதுகாப்பு'}</span>
@@ -204,9 +159,16 @@ export default function HomePage() {
       </section>
 
       {/* ── 4. The Live Thing: Interactive Estimator ── */}
-      <section className="py-12 px-4 sm:px-6 bg-brand/5">
+      <section id="estimator" className="py-10 px-4 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <ChitEstimator />
+        </div>
+      </section>
+
+      {/* ── 5. Flagship Scheme Card Carousel Slider ── */}
+      <section className="py-14 sm:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <CardCarousel />
         </div>
       </section>
 
@@ -232,10 +194,10 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setDuration('all')}
-                  className={`min-h-11 rounded-lg px-4 text-sm font-bold transition-colors ${
+                  className={`min-h-11 rounded-xl px-4 text-sm font-bold transition-all active:scale-95 ${
                     duration === 'all'
-                      ? 'bg-deep text-cream'
-                      : 'bg-white text-charcoal hover:bg-black/5'
+                      ? 'bg-deep text-cream shadow-md'
+                      : 'glass-pill text-charcoal hover:bg-white'
                   }`}
                 >
                   {t.allDurations}
@@ -245,10 +207,10 @@ export default function HomePage() {
                     key={d}
                     type="button"
                     onClick={() => setDuration(d)}
-                    className={`min-h-11 rounded-lg px-4 text-sm font-bold transition-colors ${
+                    className={`min-h-11 rounded-xl px-4 text-sm font-bold transition-all active:scale-95 ${
                       duration === d
-                        ? 'bg-deep text-cream'
-                        : 'bg-white text-charcoal hover:bg-black/5'
+                        ? 'bg-deep text-cream shadow-md'
+                        : 'glass-pill text-charcoal hover:bg-white'
                     }`}
                   >
                     {d} {t.months}
@@ -266,36 +228,38 @@ export default function HomePage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder={t.searchPlaceholder}
-                className="min-h-11 w-full rounded-lg bg-white px-3.5 text-sm text-charcoal border border-brand/20 focus:outline-none focus:border-brand lg:w-64"
+                className="field min-h-11 lg:w-64"
               />
             </div>
           </div>
 
-          {/* Scheme Cards Grid without eyebrow tags */}
+          {/* Scheme Cards Grid */}
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {available.map(s => (
               <article
                 key={s.id}
-                className="rounded-2xl bg-white p-6 transition-transform hover:-translate-y-0.5 space-y-4"
+                className="glass-card rounded-2xl p-6 sm:p-7 space-y-4 flex flex-col justify-between"
               >
-                <div className="flex items-baseline justify-between gap-3">
-                  <div className="text-2xl sm:text-3xl font-black text-deep tabular-nums">
-                    {currency(s.value)}
+                <div className="space-y-3">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <div className="text-2xl sm:text-3xl font-black text-deep tabular-nums">
+                      {currency(s.value)}
+                    </div>
+                    <span className="rounded-lg bg-brand/10 border border-brand/20 px-3 py-1 text-xs font-bold text-deep">
+                      {s.duration} {t.months}
+                    </span>
                   </div>
-                  <span className="rounded-md bg-brand/10 px-3 py-1 text-sm font-bold text-deep">
-                    {s.duration} {t.months}
-                  </span>
-                </div>
 
-                <p className="text-base font-bold text-charcoal">
-                  {currency(s.monthly)} per month (Gross)
-                </p>
+                  <p className="text-sm sm:text-base font-bold text-charcoal/80">
+                    {currency(s.monthly)} per month (Gross)
+                  </p>
+                </div>
 
                 <div className="flex gap-2 pt-2">
                   <button
                     type="button"
                     onClick={() => choose(s)}
-                    className="min-h-11 flex-1 rounded-lg bg-wine px-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                    className="min-h-11 flex-1 rounded-xl bg-wine px-3 text-sm font-bold text-white transition-all hover:bg-wine/90 active:scale-95 shadow-md shadow-wine/20"
                   >
                     {t.enquire}
                   </button>
@@ -303,7 +267,7 @@ export default function HomePage() {
                     type="button"
                     onClick={() => toggleCompare(s)}
                     aria-pressed={comparison.some(x => x.id === s.id)}
-                    className="min-h-11 rounded-lg bg-brand/10 hover:bg-brand/15 px-3 text-sm font-bold text-deep transition-colors"
+                    className="min-h-11 rounded-xl glass-pill px-3 text-sm font-bold text-deep hover:bg-white transition-all active:scale-95 shadow-sm"
                   >
                     {comparison.some(x => x.id === s.id) ? <Check size={16} /> : t.compare}
                   </button>
@@ -313,14 +277,14 @@ export default function HomePage() {
           </div>
 
           {!available.length && (
-            <p className="p-8 text-center text-charcoal bg-white rounded-xl text-base">
+            <p className="p-8 text-center text-charcoal glass-surface rounded-2xl text-base">
               {lang === 'en' ? 'No scheme matches that value search.' : 'இந்தத் தேடலுக்கு திட்டம் இல்லை.'}
             </p>
           )}
 
           {/* Comparison Matrix */}
           {comparison.length > 0 && (
-            <div data-ui="table" className="rounded-2xl bg-white p-6 sm:p-8 space-y-4">
+            <div data-ui="table" className="rounded-3xl glass-surface p-6 sm:p-8 space-y-4 border border-white/80 shadow-xl">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-deep">
                   {t.compareTitle} ({comparison.length}/3 {t.selected})
@@ -386,8 +350,12 @@ export default function HomePage() {
       </section>
 
       {/* ── 6. How It Works ── */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-deep text-cream">
-        <div className="mx-auto max-w-7xl space-y-12">
+      <section className="mx-3 sm:mx-6 my-10 rounded-3xl glass-deep text-cream py-16 sm:py-24 px-4 sm:px-8 relative overflow-hidden shadow-[0_25px_60px_-15px_rgba(20,83,45,0.35)]">
+        {/* Internal Glow Orbs */}
+        <div className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 rounded-full bg-gold/15 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute bottom-0 right-0 w-80 h-80 rounded-full bg-brand/30 blur-3xl" aria-hidden="true" />
+
+        <div className="relative z-10 mx-auto max-w-7xl space-y-12">
           <div className="max-w-3xl space-y-3">
             <h2 className="text-2xl sm:text-4xl font-black text-cream tracking-tight">
               {t.howTitle}
@@ -399,8 +367,8 @@ export default function HomePage() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {t.steps.map((st, i) => (
-              <div key={i} className="rounded-2xl bg-white/5 p-6 space-y-4">
-                <span className="inline-block text-sm font-bold text-gold">
+              <div key={i} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-6 space-y-4 hover:border-gold/50 transition-all hover:-translate-y-1 shadow-inner">
+                <span className="inline-block text-xs font-bold text-gold uppercase tracking-wider">
                   {lang === 'en' ? `Stage ${i + 1}` : `நிலை ${i + 1}`}
                 </span>
                 <h3 className="text-lg font-bold text-cream">
@@ -427,24 +395,24 @@ export default function HomePage() {
       </section>
 
       {/* ── 7. Genuine Benefits ── */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-cream">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-7xl space-y-12">
           <div className="max-w-3xl space-y-3">
             <h2 className="text-2xl sm:text-4xl font-black text-deep tracking-tight">
               {t.benefitTitle}
             </h2>
-            <p className="text-base text-charcoal leading-relaxed font-medium">
+            <p className="text-base text-charcoal/80 leading-relaxed font-medium">
               {t.benefitLead}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             {t.benefitsList.map((b, i) => (
-              <div key={i} className="rounded-2xl bg-brand/5 p-7 space-y-3">
+              <div key={i} className="glass-card rounded-2xl p-7 sm:p-8 space-y-3">
                 <h3 className="text-lg font-bold text-deep">
                   {b.title}
                 </h3>
-                <p className="text-base text-charcoal leading-relaxed">
+                <p className="text-base text-charcoal/80 leading-relaxed">
                   {b.desc}
                 </p>
               </div>
@@ -454,26 +422,26 @@ export default function HomePage() {
       </section>
 
       {/* ── 8. Leadership ── */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-brand/5">
+      <section className="py-16 sm:py-20 px-4 sm:px-6">
         <div className="mx-auto max-w-7xl space-y-10">
           <div className="max-w-3xl space-y-2">
             <h2 className="text-2xl sm:text-4xl font-black text-deep tracking-tight">
               {t.leadershipTitle}
             </h2>
-            <p className="text-base text-charcoal leading-relaxed">
+            <p className="text-base text-charcoal/80 leading-relaxed">
               {t.leadershipLead}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl bg-white p-7 space-y-4">
-              <span className="inline-block text-sm font-bold text-wine">
+            <div className="glass-card rounded-2xl p-7 sm:p-8 space-y-4">
+              <span className="inline-block text-xs font-bold text-wine uppercase tracking-wider">
                 {t.mdRole}
               </span>
               <h3 className="text-xl font-black text-deep">
                 Rtn. Velu Senthilkumar
               </h3>
-              <p className="text-base text-charcoal leading-relaxed">
+              <p className="text-base text-charcoal/80 leading-relaxed">
                 {t.companyName}
               </p>
               <div className="pt-2">
@@ -486,14 +454,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-7 space-y-4">
-              <span className="inline-block text-sm font-bold text-wine">
+            <div className="glass-card rounded-2xl p-7 sm:p-8 space-y-4">
+              <span className="inline-block text-xs font-bold text-wine uppercase tracking-wider">
                 {t.directorRole}
               </span>
               <h3 className="text-xl font-black text-deep">
                 Prabu
               </h3>
-              <p className="text-base text-charcoal leading-relaxed">
+              <p className="text-base text-charcoal/80 leading-relaxed">
                 {t.companyName}
               </p>
               <div className="pt-2 flex flex-wrap gap-4">
@@ -516,23 +484,23 @@ export default function HomePage() {
       </section>
 
       {/* ── 9. Frequently Answered Questions ── */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 bg-cream">
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-3xl space-y-8">
           <div className="space-y-2">
             <h2 className="text-2xl sm:text-4xl font-black text-deep tracking-tight">
               {t.faqTitle}
             </h2>
-            <p className="text-base text-charcoal leading-relaxed">
+            <p className="text-base text-charcoal/80 leading-relaxed">
               {t.faqLead}
             </p>
           </div>
 
           <div className="space-y-3">
             {faqs.map(([q, a], i) => (
-              <div key={q} className="rounded-xl bg-white overflow-hidden">
+              <div key={q} className="glass-card rounded-2xl overflow-hidden">
                 <button
                   type="button"
-                  className="flex min-h-14 w-full items-center justify-between gap-4 px-6 text-left font-bold text-deep text-base"
+                  className="flex min-h-14 w-full items-center justify-between gap-4 px-6 text-left font-bold text-deep text-base transition-colors hover:text-brand"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   aria-expanded={openFaq === i}
                 >
@@ -544,7 +512,7 @@ export default function HomePage() {
                   )}
                 </button>
                 {openFaq === i && (
-                  <p className="px-6 pb-5 text-base text-charcoal leading-relaxed">
+                  <p className="px-6 pb-5 text-base text-charcoal/80 leading-relaxed">
                     {a}
                   </p>
                 )}
@@ -555,17 +523,17 @@ export default function HomePage() {
       </section>
 
       {/* ── 10. Contact & Direct Enquiry Form ── */}
-      <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6 bg-brand/5">
+      <section id="contact" className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="mx-auto max-w-7xl grid gap-12 lg:grid-cols-[0.8fr_1.2fr] items-start">
           <div className="space-y-6">
             <h2 className="text-2xl sm:text-4xl font-black text-deep tracking-tight">
               {t.contactTitle}
             </h2>
-            <p className="text-base text-charcoal leading-relaxed">
+            <p className="text-base text-charcoal/80 leading-relaxed">
               {t.contactLead}
             </p>
 
-            <div className="space-y-5 text-sm leading-relaxed text-charcoal">
+            <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-5 text-sm leading-relaxed text-charcoal/85">
               <div>
                 <b className="text-deep font-bold block">{t.addressTitle}</b>
                 <p className="mt-1">{t.regAddress}</p>
@@ -588,7 +556,7 @@ export default function HomePage() {
           <form
             onSubmit={submit}
             noValidate
-            className="rounded-2xl bg-white p-6 sm:p-10 space-y-5"
+            className="rounded-3xl glass-surface p-6 sm:p-10 space-y-5 border border-white/80 shadow-xl"
           >
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
@@ -694,13 +662,13 @@ export default function HomePage() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-wine px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-wine px-6 text-sm font-bold text-white transition-all hover:bg-wine/90 active:scale-95 disabled:opacity-50 shadow-md shadow-wine/25"
             >
               {status === 'loading' ? t.submitting : t.submit}
             </button>
 
             {status === 'success' && (
-              <p className="rounded-lg bg-brand/10 p-4 text-sm font-bold text-deep" role="status">
+              <p className="rounded-xl bg-brand/10 border border-brand/20 p-4 text-sm font-bold text-deep" role="status">
                 {t.demoSuccess}
               </p>
             )}

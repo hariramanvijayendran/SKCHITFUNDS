@@ -1,4 +1,4 @@
-﻿import { useState, useId } from 'react'
+import { useState, useId } from 'react'
 import { Link } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
 import { copy } from '../data/copy'
@@ -31,8 +31,12 @@ export default function ChitEstimator() {
   }
 
   return (
-    <div className="rounded-2xl bg-deep text-cream p-6 sm:p-10 lg:p-12">
-      <div className="max-w-3xl">
+    <div className="relative overflow-hidden rounded-3xl glass-deep text-cream p-6 sm:p-10 lg:p-12 shadow-[0_25px_60px_-15px_rgba(20,83,45,0.4)]">
+      {/* Ambient Internal Glows */}
+      <div className="pointer-events-none absolute -right-20 -top-20 w-72 h-72 rounded-full bg-gold/15 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-brand/30 blur-3xl" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-3xl">
         <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-cream">
           {t.estimatorTitle}
         </h2>
@@ -41,7 +45,7 @@ export default function ChitEstimator() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
+      <div className="relative z-10 mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] items-start">
         <div className="space-y-6">
           <div>
             <label htmlFor={durationSelectId} className="block text-sm font-bold text-gold mb-3">
@@ -53,10 +57,10 @@ export default function ChitEstimator() {
                   key={d}
                   type="button"
                   onClick={() => handleDurationChange(d)}
-                  className={`min-h-12 rounded-lg font-bold text-sm transition-colors text-center px-3 py-2 ${
+                  className={`min-h-12 rounded-xl font-bold text-sm transition-all text-center px-3 py-2 active:scale-95 ${
                     selectedDuration === d
-                      ? 'bg-gold text-deep font-extrabold'
-                      : 'bg-white/10 text-cream hover:bg-white/15'
+                      ? 'bg-gold text-deep font-extrabold shadow-lg shadow-gold/25 ring-2 ring-white/40'
+                      : 'bg-white/10 hover:bg-white/18 text-cream backdrop-blur-sm border border-white/15'
                   }`}
                 >
                   {d} {t.months}
@@ -73,7 +77,7 @@ export default function ChitEstimator() {
               id={valueSelectId}
               value={selectedValue}
               onChange={e => setSelectedValue(Number(e.target.value))}
-              className="w-full min-h-12 rounded-lg bg-white/15 border border-white/20 text-cream px-4 py-3 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-gold"
+              className="w-full min-h-12 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 text-cream px-4 py-3 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-gold/80"
             >
               {availableSchemesForDuration.map(s => (
                 <option key={s.id} value={s.value} className="bg-deep text-cream">
@@ -88,10 +92,10 @@ export default function ChitEstimator() {
                   key={s.id}
                   type="button"
                   onClick={() => setSelectedValue(s.value)}
-                  className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all active:scale-95 ${
                     selectedValue === s.value
-                      ? 'bg-cream text-deep font-bold'
-                      : 'bg-white/10 text-cream/90 hover:bg-white/20'
+                      ? 'bg-cream text-deep font-bold shadow-md shadow-white/20'
+                      : 'bg-white/10 hover:bg-white/20 text-cream/90 backdrop-blur-sm border border-white/10'
                   }`}
                 >
                   {currency(s.value)}
@@ -101,8 +105,11 @@ export default function ChitEstimator() {
           </div>
         </div>
 
-        <div className="rounded-xl bg-white/10 p-6 sm:p-8 space-y-6">
-          <div className="flex items-baseline justify-between gap-2"><span className="text-3xl sm:text-4xl font-extrabold text-cream tabular-nums">{currency(selectedValue)}</span><span className="text-sm font-bold text-gold">{t.chitValue}</span></div>
+        <div className="rounded-2xl bg-white/12 backdrop-blur-md border border-white/20 p-6 sm:p-8 space-y-6 shadow-inner">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="text-3xl sm:text-4xl font-extrabold text-cream tabular-nums">{currency(selectedValue)}</span>
+            <span className="text-sm font-bold text-gold">{t.chitValue}</span>
+          </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -123,7 +130,7 @@ export default function ChitEstimator() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-white/5 p-4 text-sm sm:text-sm text-cream/80 leading-relaxed">
+          <div className="rounded-xl bg-white/8 backdrop-blur-sm border border-white/10 p-4 text-sm text-cream/90 leading-relaxed">
             <b className="text-gold font-bold">Estimated Net Payable:</b> Typically reduced to{' '}
             <span className="font-bold text-cream tabular-nums">
               {currency(estEffectiveMinMonthly)} – {currency(estEffectiveMaxMonthly)}
@@ -133,7 +140,7 @@ export default function ChitEstimator() {
 
           <Link
             to={`/contact?duration=${selectedDuration}&value=${selectedValue}`}
-            className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-wine px-6 font-bold text-white transition-opacity hover:opacity-90 text-sm tracking-wide"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-wine px-6 font-bold text-white transition-all hover:bg-wine/90 active:scale-[0.98] text-sm tracking-wide shadow-lg shadow-wine/30"
           >
             {t.estimatorAction} ({currency(selectedValue)})
           </Link>

@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Check } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLang } from '../context/LangContext'
@@ -53,10 +53,10 @@ export default function SchemesPage() {
                 <button
                   type="button"
                   onClick={() => setDuration('all')}
-                  className={`min-h-11 rounded-lg px-4 text-xs font-bold transition-colors ${
+                  className={`min-h-11 rounded-xl px-4 text-xs font-bold transition-all active:scale-95 ${
                     duration === 'all'
-                      ? 'bg-deep text-cream'
-                      : 'bg-white text-charcoal hover:bg-black/5'
+                      ? 'bg-deep text-cream shadow-md'
+                      : 'glass-pill text-charcoal hover:bg-white'
                   }`}
                 >
                   {t.allDurations}
@@ -66,10 +66,10 @@ export default function SchemesPage() {
                     key={d}
                     type="button"
                     onClick={() => setDuration(d)}
-                    className={`min-h-11 rounded-lg px-4 text-xs font-bold transition-colors ${
+                    className={`min-h-11 rounded-xl px-4 text-xs font-bold transition-all active:scale-95 ${
                       duration === d
-                        ? 'bg-deep text-cream'
-                        : 'bg-white text-charcoal hover:bg-black/5'
+                        ? 'bg-deep text-cream shadow-md'
+                        : 'glass-pill text-charcoal hover:bg-white'
                     }`}
                   >
                     {d} {t.months}
@@ -79,7 +79,7 @@ export default function SchemesPage() {
             </div>
 
             <div>
-              <label htmlFor="schemes-search-field" className="block text-xs font-bold text-deep  mb-2">
+              <label htmlFor="schemes-search-field" className="block text-xs font-bold text-deep mb-2">
                 {t.search}
               </label>
               <input
@@ -87,7 +87,7 @@ export default function SchemesPage() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder={t.searchPlaceholder}
-                className="min-h-11 w-full rounded-lg bg-white px-3.5 text-sm text-charcoal border border-brand/20 focus:outline-none focus:border-brand lg:w-64"
+                className="field min-h-11 lg:w-64"
               />
             </div>
           </div>
@@ -97,13 +97,13 @@ export default function SchemesPage() {
             {available.map(s => (
               <article
                 key={s.id}
-                className="rounded-2xl bg-white p-6 transition-transform hover:-translate-y-0.5 space-y-5"
+                className="glass-card rounded-2xl p-6 space-y-5 flex flex-col justify-between"
               >
                 <div className="flex items-center justify-between">
-                  <span className="rounded-md bg-brand/10 px-3 py-1 text-xs font-bold text-deep">
+                  <span className="rounded-lg bg-brand/10 border border-brand/20 px-3 py-1 text-xs font-bold text-deep">
                     {s.duration} {t.months}
                   </span>
-                  <span className="text-xs text-charcoal/50 font-medium">
+                  <span className="text-xs text-charcoal/60 font-medium">
                     {lang === 'en' ? 'Brochure Plan' : 'சிற்றேட்டுத் திட்டம்'}
                   </span>
                 </div>
@@ -129,7 +129,7 @@ export default function SchemesPage() {
                 <div className="flex gap-2 pt-1">
                   <Link
                     to={`/contact?duration=${s.duration}&value=${s.value}`}
-                    className="min-h-11 flex-1 rounded-lg bg-wine px-3 text-xs font-bold text-white transition-opacity hover:opacity-90 flex items-center justify-center"
+                    className="min-h-11 flex-1 rounded-xl bg-wine px-3 text-xs font-bold text-white transition-all hover:bg-wine/90 active:scale-95 flex items-center justify-center shadow-md shadow-wine/20"
                   >
                     {t.enquire}
                   </Link>
@@ -137,7 +137,7 @@ export default function SchemesPage() {
                     type="button"
                     onClick={() => toggleCompare(s)}
                     aria-pressed={comparison.some(x => x.id === s.id)}
-                    className="min-h-11 rounded-lg bg-brand/10 hover:bg-brand/15 px-3 text-xs font-bold text-deep transition-colors"
+                    className="min-h-11 rounded-xl glass-pill px-3 text-xs font-bold text-deep hover:bg-white transition-all active:scale-95 shadow-sm"
                   >
                     {comparison.some(x => x.id === s.id) ? <Check size={16} /> : t.compare}
                   </button>
@@ -147,14 +147,14 @@ export default function SchemesPage() {
           </div>
 
           {!available.length && (
-            <p className="p-8 text-center text-charcoal/70 bg-white rounded-xl">
+            <p className="p-8 text-center text-charcoal glass-surface rounded-2xl">
               {lang === 'en' ? 'No scheme matches that search.' : 'இந்தத் தேடலுக்கு திட்டம் இல்லை.'}
             </p>
           )}
 
           {/* Comparison Matrix */}
           {comparison.length > 0 && (
-            <div className="rounded-2xl bg-white p-6 sm:p-8 space-y-4">
+            <div className="rounded-3xl glass-surface p-6 sm:p-8 space-y-4 border border-white/80 shadow-xl">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-deep">
                   {t.compareTitle} ({comparison.length}/3 {t.selected})
